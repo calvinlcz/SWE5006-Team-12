@@ -1,0 +1,47 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (registered(); as registeredRef) {
+      <div>
+        <h2 data-cy="registeredDetailsHeading"><span jhiTranslate="toDoListApp.registered.detail.title">Registered</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ registeredRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="toDoListApp.registered.accountNo">Account No</span></dt>
+          <dd>
+            <span>{{ registeredRef.accountNo }}</span>
+          </dd>
+          <dt><span jhiTranslate="toDoListApp.registered.linkWorkspace">Link Workspace</span></dt>
+          <dd>
+            <span>{{ registeredRef.linkWorkspace }}</span>
+          </dd>
+          <dt><span jhiTranslate="toDoListApp.registered.workSpace">Work Space</span></dt>
+          <dd>
+            @for (workSpace of registeredRef.workSpaces; track $index; let last = $last) {
+              <span>
+                <a [routerLink]="['/work-space', workSpace.id, 'view']">{{ workSpace?.id }}</a
+                >{{ last ? '' : ', ' }}
+              </span>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/registered', registeredRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

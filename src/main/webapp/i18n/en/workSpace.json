@@ -1,0 +1,31 @@
+{
+  "toDoListApp": {
+    "workSpace": {
+      "home": {
+        "title": "Work Spaces",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Work Space",
+        "createOrEditLabel": "Create or edit a Work Space",
+        "notFound": "No Work Spaces found"
+      },
+      "created": "A new Work Space is created with identifier {{ param }}",
+      "updated": "A Work Space is updated with identifier {{ param }}",
+      "deleted": "A Work Space is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Work Space {{ id }}?"
+      },
+      "detail": {
+        "title": "Work Space"
+      },
+      "id": "ID",
+      "name": "Name",
+      "dateCreated": "Date Created",
+      "createdBy": "Created By",
+      "dateModified": "Date Modified",
+      "modifiedBy": "Modified By",
+      "sharedWorkspace": "Shared Workspace",
+      "task": "Task",
+      "registered": "Registered"
+    }
+  }
+}

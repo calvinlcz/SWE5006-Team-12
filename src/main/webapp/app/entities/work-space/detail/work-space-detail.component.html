@@ -1,0 +1,63 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (workSpace(); as workSpaceRef) {
+      <div>
+        <h2 data-cy="workSpaceDetailsHeading"><span jhiTranslate="toDoListApp.workSpace.detail.title">Work Space</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ workSpaceRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="toDoListApp.workSpace.name">Name</span></dt>
+          <dd>
+            <span>{{ workSpaceRef.name }}</span>
+          </dd>
+          <dt><span jhiTranslate="toDoListApp.workSpace.dateCreated">Date Created</span></dt>
+          <dd>
+            <span>{{ workSpaceRef.dateCreated | formatMediumDate }}</span>
+          </dd>
+          <dt><span jhiTranslate="toDoListApp.workSpace.createdBy">Created By</span></dt>
+          <dd>
+            <span>{{ workSpaceRef.createdBy }}</span>
+          </dd>
+          <dt><span jhiTranslate="toDoListApp.workSpace.dateModified">Date Modified</span></dt>
+          <dd>
+            <span>{{ workSpaceRef.dateModified | formatMediumDate }}</span>
+          </dd>
+          <dt><span jhiTranslate="toDoListApp.workSpace.modifiedBy">Modified By</span></dt>
+          <dd>
+            <span>{{ workSpaceRef.modifiedBy }}</span>
+          </dd>
+          <dt><span jhiTranslate="toDoListApp.workSpace.sharedWorkspace">Shared Workspace</span></dt>
+          <dd>
+            <span>{{ workSpaceRef.sharedWorkspace }}</span>
+          </dd>
+          <dt><span jhiTranslate="toDoListApp.workSpace.registered">Registered</span></dt>
+          <dd>
+            @for (registered of workSpaceRef.registereds; track $index; let last = $last) {
+              <span>
+                <a [routerLink]="['/registered', registered.id, 'view']">{{ registered?.id }}</a
+                >{{ last ? '' : ', ' }}
+              </span>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/work-space', workSpaceRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

@@ -1,0 +1,3 @@
+org.springframework.test.context.ContextCustomizerFactory = \
+    nusiss.swe5006.team12.todolist.config.\
+    SqlTestContainersSpringContextCustomizerFactory

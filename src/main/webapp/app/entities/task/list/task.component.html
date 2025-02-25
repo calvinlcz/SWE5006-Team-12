@@ -1,0 +1,185 @@
+<div>
+  <h2 id="page-heading" data-cy="TaskHeading">
+    <span jhiTranslate="toDoListApp.task.home.title">Tasks</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [animation]="isLoading ? 'spin' : undefined"></fa-icon>
+        <span jhiTranslate="toDoListApp.task.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-task"
+        [routerLink]="['/task/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="toDoListApp.task.home.createLabel">Create a new Task</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  @if (tasks().length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="toDoListApp.task.home.notFound">No Tasks found</span>
+    </div>
+  } @else {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [(sortState)]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="name">
+              <div class="d-flex">
+                <span jhiTranslate="toDoListApp.task.name">Name</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="description">
+              <div class="d-flex">
+                <span jhiTranslate="toDoListApp.task.description">Description</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="dueDate">
+              <div class="d-flex">
+                <span jhiTranslate="toDoListApp.task.dueDate">Due Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="dateCreated">
+              <div class="d-flex">
+                <span jhiTranslate="toDoListApp.task.dateCreated">Date Created</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="createdBy">
+              <div class="d-flex">
+                <span jhiTranslate="toDoListApp.task.createdBy">Created By</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="dateModified">
+              <div class="d-flex">
+                <span jhiTranslate="toDoListApp.task.dateModified">Date Modified</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="modifiedBy">
+              <div class="d-flex">
+                <span jhiTranslate="toDoListApp.task.modifiedBy">Modified By</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="isRecurring">
+              <div class="d-flex">
+                <span jhiTranslate="toDoListApp.task.isRecurring">Is Recurring</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="recurrenceRule">
+              <div class="d-flex">
+                <span jhiTranslate="toDoListApp.task.recurrenceRule">Recurrence Rule</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="priority">
+              <div class="d-flex">
+                <span jhiTranslate="toDoListApp.task.priority">Priority</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="status">
+              <div class="d-flex">
+                <span jhiTranslate="toDoListApp.task.status">Status</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="workSpace.id">
+              <div class="d-flex">
+                <span jhiTranslate="toDoListApp.task.workSpace">Work Space</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (task of tasks(); track trackId(task)) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/task', task.id, 'view']">{{ task.id }}</a>
+              </td>
+              <td>{{ task.name }}</td>
+              <td>{{ task.description }}</td>
+              <td>{{ task.dueDate | formatMediumDate }}</td>
+              <td>{{ task.dateCreated | formatMediumDate }}</td>
+              <td>{{ task.createdBy }}</td>
+              <td>{{ task.dateModified | formatMediumDate }}</td>
+              <td>{{ task.modifiedBy }}</td>
+              <td>{{ task.isRecurring }}</td>
+              <td [jhiTranslate]="'toDoListApp.Rule.' + (task.recurrenceRule ?? 'null')">
+                {{ { null: '', Daily: 'Daily', Weekly: 'Weekly', Monthly: 'Monthly' }[task.recurrenceRule ?? 'null'] }}
+              </td>
+              <td>{{ task.priority }}</td>
+              <td [jhiTranslate]="'toDoListApp.Status.' + (task.status ?? 'null')">
+                {{
+                  { null: '', Pending: 'Pending', Inprogress: 'Inprogress', Completed: 'Completed', Paused: 'Paused' }[
+                    task.status ?? 'null'
+                  ]
+                }}
+              </td>
+              <td>
+                @if (task.workSpace) {
+                  <div>
+                    <a [routerLink]="['/work-space', task.workSpace.id, 'view']">{{ task.workSpace.id }}</a>
+                  </div>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a [routerLink]="['/task', task.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                  </a>
+
+                  <a [routerLink]="['/task', task.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(task)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

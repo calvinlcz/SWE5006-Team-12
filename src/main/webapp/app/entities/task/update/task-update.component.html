@@ -1,0 +1,238 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-task-heading" data-cy="TaskCreateUpdateHeading" jhiTranslate="toDoListApp.task.home.createOrEditLabel">
+        Create or edit a Task
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" jhiTranslate="toDoListApp.task.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        @let nameRef = editForm.get('name')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_name" jhiTranslate="toDoListApp.task.name">Name</label>
+          <input type="text" class="form-control" name="name" id="field_name" data-cy="name" formControlName="name" />
+          @if (nameRef.invalid && (nameRef.dirty || nameRef.touched)) {
+            <div>
+              @if (editForm.get('name')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              @if (editForm.get('name')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '50' }"
+                  >This field cannot be longer than 50 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_description" jhiTranslate="toDoListApp.task.description">Description</label>
+          <input
+            type="text"
+            class="form-control"
+            name="description"
+            id="field_description"
+            data-cy="description"
+            formControlName="description"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_dueDate" jhiTranslate="toDoListApp.task.dueDate">Due Date</label>
+          <div class="input-group">
+            <input
+              id="field_dueDate"
+              data-cy="dueDate"
+              type="text"
+              class="form-control"
+              name="dueDate"
+              ngbDatepicker
+              #dueDateDp="ngbDatepicker"
+              formControlName="dueDate"
+            />
+            <button type="button" class="btn btn-secondary" (click)="dueDateDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+          </div>
+        </div>
+
+        @let dateCreatedRef = editForm.get('dateCreated')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_dateCreated" jhiTranslate="toDoListApp.task.dateCreated">Date Created</label>
+          <div class="input-group">
+            <input
+              id="field_dateCreated"
+              data-cy="dateCreated"
+              type="text"
+              class="form-control"
+              name="dateCreated"
+              ngbDatepicker
+              #dateCreatedDp="ngbDatepicker"
+              formControlName="dateCreated"
+            />
+            <button type="button" class="btn btn-secondary" (click)="dateCreatedDp.toggle()">
+              <fa-icon icon="calendar-alt"></fa-icon>
+            </button>
+          </div>
+          @if (dateCreatedRef.invalid && (dateCreatedRef.dirty || dateCreatedRef.touched)) {
+            <div>
+              @if (editForm.get('dateCreated')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        @let createdByRef = editForm.get('createdBy')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_createdBy" jhiTranslate="toDoListApp.task.createdBy">Created By</label>
+          <input type="text" class="form-control" name="createdBy" id="field_createdBy" data-cy="createdBy" formControlName="createdBy" />
+          @if (createdByRef.invalid && (createdByRef.dirty || createdByRef.touched)) {
+            <div>
+              @if (editForm.get('createdBy')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        @let dateModifiedRef = editForm.get('dateModified')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_dateModified" jhiTranslate="toDoListApp.task.dateModified">Date Modified</label>
+          <div class="input-group">
+            <input
+              id="field_dateModified"
+              data-cy="dateModified"
+              type="text"
+              class="form-control"
+              name="dateModified"
+              ngbDatepicker
+              #dateModifiedDp="ngbDatepicker"
+              formControlName="dateModified"
+            />
+            <button type="button" class="btn btn-secondary" (click)="dateModifiedDp.toggle()">
+              <fa-icon icon="calendar-alt"></fa-icon>
+            </button>
+          </div>
+          @if (dateModifiedRef.invalid && (dateModifiedRef.dirty || dateModifiedRef.touched)) {
+            <div>
+              @if (editForm.get('dateModified')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        @let modifiedByRef = editForm.get('modifiedBy')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_modifiedBy" jhiTranslate="toDoListApp.task.modifiedBy">Modified By</label>
+          <input
+            type="text"
+            class="form-control"
+            name="modifiedBy"
+            id="field_modifiedBy"
+            data-cy="modifiedBy"
+            formControlName="modifiedBy"
+          />
+          @if (modifiedByRef.invalid && (modifiedByRef.dirty || modifiedByRef.touched)) {
+            <div>
+              @if (editForm.get('modifiedBy')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_isRecurring" jhiTranslate="toDoListApp.task.isRecurring">Is Recurring</label>
+          <input
+            type="checkbox"
+            class="form-check"
+            name="isRecurring"
+            id="field_isRecurring"
+            data-cy="isRecurring"
+            formControlName="isRecurring"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_recurrenceRule" jhiTranslate="toDoListApp.task.recurrenceRule">Recurrence Rule</label>
+          <select
+            class="form-control"
+            name="recurrenceRule"
+            formControlName="recurrenceRule"
+            id="field_recurrenceRule"
+            data-cy="recurrenceRule"
+          >
+            <option [ngValue]="null">{{ 'toDoListApp.Rule.null' | translate }}</option>
+            @for (rule of ruleValues; track $index) {
+              <option [value]="rule">{{ 'toDoListApp.Rule.' + rule | translate }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_priority" jhiTranslate="toDoListApp.task.priority">Priority</label>
+          <input type="text" class="form-control" name="priority" id="field_priority" data-cy="priority" formControlName="priority" />
+        </div>
+
+        @let statusRef = editForm.get('status')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_status" jhiTranslate="toDoListApp.task.status">Status</label>
+          <select class="form-control" name="status" formControlName="status" id="field_status" data-cy="status">
+            <option [ngValue]="null">{{ 'toDoListApp.Status.null' | translate }}</option>
+            @for (status of statusValues; track $index) {
+              <option [value]="status">{{ 'toDoListApp.Status.' + status | translate }}</option>
+            }
+          </select>
+          @if (statusRef.invalid && (statusRef.dirty || statusRef.touched)) {
+            <div>
+              @if (editForm.get('status')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_workSpace" jhiTranslate="toDoListApp.task.workSpace">Work Space</label>
+          <select
+            class="form-control"
+            id="field_workSpace"
+            data-cy="workSpace"
+            name="workSpace"
+            formControlName="workSpace"
+            [compareWith]="compareWorkSpace"
+          >
+            <option [ngValue]="null"></option>
+            @for (workSpaceOption of workSpacesSharedCollection; track $index) {
+              <option [ngValue]="workSpaceOption">{{ workSpaceOption.id }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

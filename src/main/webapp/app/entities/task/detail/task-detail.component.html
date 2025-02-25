@@ -1,0 +1,86 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (task(); as taskRef) {
+      <div>
+        <h2 data-cy="taskDetailsHeading"><span jhiTranslate="toDoListApp.task.detail.title">Task</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ taskRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="toDoListApp.task.name">Name</span></dt>
+          <dd>
+            <span>{{ taskRef.name }}</span>
+          </dd>
+          <dt><span jhiTranslate="toDoListApp.task.description">Description</span></dt>
+          <dd>
+            <span>{{ taskRef.description }}</span>
+          </dd>
+          <dt><span jhiTranslate="toDoListApp.task.dueDate">Due Date</span></dt>
+          <dd>
+            <span>{{ taskRef.dueDate | formatMediumDate }}</span>
+          </dd>
+          <dt><span jhiTranslate="toDoListApp.task.dateCreated">Date Created</span></dt>
+          <dd>
+            <span>{{ taskRef.dateCreated | formatMediumDate }}</span>
+          </dd>
+          <dt><span jhiTranslate="toDoListApp.task.createdBy">Created By</span></dt>
+          <dd>
+            <span>{{ taskRef.createdBy }}</span>
+          </dd>
+          <dt><span jhiTranslate="toDoListApp.task.dateModified">Date Modified</span></dt>
+          <dd>
+            <span>{{ taskRef.dateModified | formatMediumDate }}</span>
+          </dd>
+          <dt><span jhiTranslate="toDoListApp.task.modifiedBy">Modified By</span></dt>
+          <dd>
+            <span>{{ taskRef.modifiedBy }}</span>
+          </dd>
+          <dt><span jhiTranslate="toDoListApp.task.isRecurring">Is Recurring</span></dt>
+          <dd>
+            <span>{{ taskRef.isRecurring }}</span>
+          </dd>
+          <dt><span jhiTranslate="toDoListApp.task.recurrenceRule">Recurrence Rule</span></dt>
+          <dd>
+            <span [jhiTranslate]="'toDoListApp.Rule.' + (taskRef.recurrenceRule ?? 'null')">{{
+              { null: '', Daily: 'Daily', Weekly: 'Weekly', Monthly: 'Monthly' }[taskRef.recurrenceRule ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="toDoListApp.task.priority">Priority</span></dt>
+          <dd>
+            <span>{{ taskRef.priority }}</span>
+          </dd>
+          <dt><span jhiTranslate="toDoListApp.task.status">Status</span></dt>
+          <dd>
+            <span [jhiTranslate]="'toDoListApp.Status.' + (taskRef.status ?? 'null')">{{
+              { null: '', Pending: 'Pending', Inprogress: 'Inprogress', Completed: 'Completed', Paused: 'Paused' }[taskRef.status ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="toDoListApp.task.workSpace">Work Space</span></dt>
+          <dd>
+            @if (task()!.workSpace) {
+              <div>
+                <a [routerLink]="['/work-space', task()!.workSpace?.id, 'view']">{{ taskRef.workSpace?.id }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/task', taskRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>
