@@ -195,53 +195,6 @@
             <version>${archunit-junit5.version}</version>
             <scope>test</scope>
         </dependency>
-<dependency>
-    <groupId>com.google.oauth-client</groupId>
-    <artifactId>google-oauth-client</artifactId>
-    <version>1.34.0</version>
-</dependency>
-<dependency>
-    <groupId>com.google.http-client</groupId>
-    <artifactId>google-http-client-gson</artifactId>
-    <version>1.39.2</version>
-</dependency>
-<dependency>
-    <groupId>com.google.apis</groupId>
-    <artifactId>google-api-services-calendar</artifactId>
-    <version>v3-rev411-1.25.0</version>
-</dependency>
-<dependency>
-    <groupId>com.google.oauth-client</groupId>
-    <artifactId>google-oauth-client-java6</artifactId>
-    <version>1.34.1</version>
-</dependency>
-<dependency>
-    <groupId>com.google.oauth-client</groupId>
-    <artifactId>google-oauth-client-jetty</artifactId>
-    <version>1.34.1</version>
-</dependency>
-<dependency>
-    <groupId>com.google.api-client</groupId>
-    <artifactId>google-api-client</artifactId>
-    <version>1.34.0</version>
-</dependency>
-<dependency>
-    <groupId>com.microsoft.graph</groupId>
-    <artifactId>microsoft-graph</artifactId>
-    <version>5.53.0</version>
-</dependency>
-<dependency>
-    <groupId>com.microsoft.azure</groupId>
-    <artifactId>msal4j</artifactId>
-    <version>1.17.2</version>
-</dependency>   
-<dependency>
-    <groupId>com.azure</groupId>
-    <artifactId>azure-identity</artifactId>
-    <version>1.13.2</version>
-    <scope>compile</scope>
-</dependency>
-     
         <dependency>
             <!-- Adding the engine dependency to the surefire-plugin unfortunately does not work in the current version. -->
             <!-- https://www.archunit.org/userguide/html/000_Index.html#_junit_5 -->
@@ -576,7 +529,6 @@
                         <systemPropertyVariables>
                             <java.util.logging.config.file>src/test/resources/logback.xml</java.util.logging.config.file>
                         </systemPropertyVariables>
-                        <argLine>-Djava.awt.headless=false</argLine>
                     </configuration>
                 </plugin>
                 <plugin>

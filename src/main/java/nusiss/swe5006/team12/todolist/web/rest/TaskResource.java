@@ -51,12 +51,11 @@ public class TaskResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("")
-    public ResponseEntity<Task> createTask(@Valid @RequestBody Task task) throws URISyntaxException, Exception {
+    public ResponseEntity<Task> createTask(@Valid @RequestBody Task task) throws URISyntaxException {
         LOG.debug("REST request to save Task : {}", task);
         if (task.getId() != null) {
             throw new BadRequestAlertException("A new task cannot already have an ID", ENTITY_NAME, "idexists");
         }
-
         task = taskRepository.save(task);
         return ResponseEntity.created(new URI("/api/tasks/" + task.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, task.getId().toString()))
