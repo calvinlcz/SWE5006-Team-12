@@ -1,0 +1,26 @@
+{
+  "toDoListApp": {
+    "registered": {
+      "home": {
+        "title": "Registereds",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Registered",
+        "createOrEditLabel": "Create or edit a Registered",
+        "notFound": "No Registereds found"
+      },
+      "created": "A new Registered is created with identifier {{ param }}",
+      "updated": "A Registered is updated with identifier {{ param }}",
+      "deleted": "A Registered is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Registered {{ id }}?"
+      },
+      "detail": {
+        "title": "Registered"
+      },
+      "id": "ID",
+      "accountNo": "Account No",
+      "linkWorkspace": "Link Workspace",
+      "workSpace": "Work Space"
+    }
+  }
+}

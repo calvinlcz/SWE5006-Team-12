@@ -1,0 +1,107 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-notification-heading"
+        data-cy="NotificationCreateUpdateHeading"
+        jhiTranslate="toDoListApp.notification.home.createOrEditLabel"
+      >
+        Create or edit a Notification
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" jhiTranslate="toDoListApp.notification.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        @let messageRef = editForm.get('message')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_message" jhiTranslate="toDoListApp.notification.message">Message</label>
+          <input type="text" class="form-control" name="message" id="field_message" data-cy="message" formControlName="message" />
+          @if (messageRef.invalid && (messageRef.dirty || messageRef.touched)) {
+            <div>
+              @if (editForm.get('message')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              @if (editForm.get('message')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '50' }"
+                  >This field cannot be longer than 50 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let alertTimeRef = editForm.get('alertTime')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_alertTime" jhiTranslate="toDoListApp.notification.alertTime">Alert Time</label>
+          <div class="input-group">
+            <input
+              id="field_alertTime"
+              data-cy="alertTime"
+              type="text"
+              class="form-control"
+              name="alertTime"
+              ngbDatepicker
+              #alertTimeDp="ngbDatepicker"
+              formControlName="alertTime"
+            />
+            <button type="button" class="btn btn-secondary" (click)="alertTimeDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+          </div>
+          @if (alertTimeRef.invalid && (alertTimeRef.dirty || alertTimeRef.touched)) {
+            <div>
+              @if (editForm.get('alertTime')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_disableNotification" jhiTranslate="toDoListApp.notification.disableNotification"
+            >Disable Notification</label
+          >
+          <input
+            type="checkbox"
+            class="form-check"
+            name="disableNotification"
+            id="field_disableNotification"
+            data-cy="disableNotification"
+            formControlName="disableNotification"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_task" jhiTranslate="toDoListApp.notification.task">Task</label>
+          <select class="form-control" id="field_task" data-cy="task" name="task" formControlName="task" [compareWith]="compareTask">
+            <option [ngValue]="null"></option>
+            @for (taskOption of tasksSharedCollection; track $index) {
+              <option [ngValue]="taskOption">{{ taskOption.id }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

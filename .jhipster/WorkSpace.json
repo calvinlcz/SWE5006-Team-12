@@ -1,0 +1,56 @@
+{
+  "annotations": {
+    "changelogDate": "20250221081530"
+  },
+  "applications": ["toDoList"],
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "dateCreated",
+      "fieldType": "LocalDate",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "createdBy",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "dateModified",
+      "fieldType": "LocalDate",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "modifiedBy",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "sharedWorkspace",
+      "fieldType": "Boolean"
+    }
+  ],
+  "name": "WorkSpace",
+  "relationships": [
+    {
+      "otherEntityName": "task",
+      "otherEntityRelationshipName": "workSpace",
+      "relationshipName": "task",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "registered",
+      "otherEntityRelationshipName": "workSpace",
+      "relationshipName": "registered",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "searchEngine": "no"
+}

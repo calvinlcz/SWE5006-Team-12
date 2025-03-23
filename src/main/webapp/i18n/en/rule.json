@@ -1,0 +1,10 @@
+{
+  "toDoListApp": {
+    "Rule": {
+      "null": "",
+      "Daily": "Daily",
+      "Weekly": "Weekly",
+      "Monthly": "Monthly"
+    }
+  }
+}

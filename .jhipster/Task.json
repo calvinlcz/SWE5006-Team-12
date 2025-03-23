@@ -1,0 +1,79 @@
+{
+  "annotations": {
+    "changelogDate": "20250221081630"
+  },
+  "applications": ["toDoList"],
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "dueDate",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "dateCreated",
+      "fieldType": "LocalDate",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "createdBy",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "dateModified",
+      "fieldType": "LocalDate",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "modifiedBy",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "isRecurring",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "recurrenceRule",
+      "fieldType": "Rule",
+      "fieldValues": "Daily,Weekly,Monthly"
+    },
+    {
+      "fieldName": "priority",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "Status",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "Pending,Inprogress,Completed,Paused"
+    }
+  ],
+  "name": "Task",
+  "relationships": [
+    {
+      "otherEntityName": "notification",
+      "otherEntityRelationshipName": "task",
+      "relationshipName": "notification",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "workSpace",
+      "otherEntityRelationshipName": "task",
+      "relationshipName": "workSpace",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no"
+}

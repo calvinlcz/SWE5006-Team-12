@@ -1,0 +1,11 @@
+{
+  "toDoListApp": {
+    "Status": {
+      "null": "",
+      "Pending": "Pending",
+      "Inprogress": "Inprogress",
+      "Completed": "Completed",
+      "Paused": "Paused"
+    }
+  }
+}

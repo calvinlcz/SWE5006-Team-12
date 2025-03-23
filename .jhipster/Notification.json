@@ -1,0 +1,34 @@
+{
+  "annotations": {
+    "changelogDate": "20250221081730"
+  },
+  "applications": ["toDoList"],
+  "fields": [
+    {
+      "fieldName": "message",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "alertTime",
+      "fieldType": "LocalDate",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "disableNotification",
+      "fieldType": "Boolean"
+    }
+  ],
+  "name": "Notification",
+  "relationships": [
+    {
+      "otherEntityName": "task",
+      "otherEntityRelationshipName": "notification",
+      "relationshipName": "task",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no"
+}
