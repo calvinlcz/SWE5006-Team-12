@@ -11,4 +11,4 @@ COPY target/*.jar app.jar
 EXPOSE 8080
 
 # Run the JAR file when the container starts
-CMD ["java", "-Dspring.profiles.active=prod", "-Dserver.address=0.0.0.0", "-jar", "app.jar"]
+CMD ["java", "-Dspring.profiles.active=dev", "-Dserver.address=0.0.0.0", "-jar", "app.jar"]
