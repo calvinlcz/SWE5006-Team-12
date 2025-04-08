@@ -105,7 +105,7 @@ public class TaskResource {
 
         if (task.isPresent()) {
             IOAuth2StrategyService service = new GoogleOAuth2Service();
-            service.addEvent(task.get());
+            service.addEvent(task.orElseThrow());
         }
         return ResponseUtil.wrapOrNotFound(task);
     }
