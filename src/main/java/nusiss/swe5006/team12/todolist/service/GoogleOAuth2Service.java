@@ -20,6 +20,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URI;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.security.GeneralSecurityException;
 import java.time.ZoneId;
 import java.time.ZoneOffset;
@@ -34,9 +37,14 @@ public class GoogleOAuth2Service implements IOAuth2StrategyService {
     private final String APPLICATION_NAME = "Google Calendar API Java Quickstart";
 
     {
-        File tokensDir = new File(TOKENS_DIRECTORY_PATH);
-        if (!tokensDir.exists()) {
-            tokensDir.mkdirs(); // Creates the directory if it doesn't exist
+        Path tokensDir = Path.of(TOKENS_DIRECTORY_PATH);
+        if (Files.notExists(tokensDir)) {
+            try {
+                Files.createDirectories(tokensDir); // Creates the directory if it doesn't exist
+            } catch (IOException e) {
+                // Handle the exception as needed, maybe log it or rethrow
+                e.printStackTrace();
+            }
         }
     }
 
@@ -53,7 +61,7 @@ public class GoogleOAuth2Service implements IOAuth2StrategyService {
                 clientSecrets,
                 Collections.singleton(CalendarScopes.CALENDAR)
             )
-                .setDataStoreFactory(new FileDataStoreFactory(new java.io.File(TOKENS_DIRECTORY_PATH)))
+                .setDataStoreFactory(new FileDataStoreFactory(Path.of(TOKENS_DIRECTORY_PATH).toFile()))
                 .setAccessType("offline")
                 .build();
         } catch (Exception e) {
@@ -67,7 +75,6 @@ public class GoogleOAuth2Service implements IOAuth2StrategyService {
     private Credential authorize() throws Exception {
         GoogleAuthorizationCodeFlow flow = getGoogleAuthorizationCodeFlow();
         String authorizationUrl = flow.newAuthorizationUrl().setRedirectUri("http://localhost:60554/Callback").build();
-        Desktop.getDesktop().browse(new URI(authorizationUrl));
         LocalServerReceiver receiver = new LocalServerReceiver.Builder()
             .setPort(60554) // Match this with your Google OAuth redirect URI
             .setCallbackPath("/Callback") // Ensure this matches the redirect URI in Google Cloud settings

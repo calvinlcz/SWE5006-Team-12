@@ -57,6 +57,8 @@ public class TaskResource {
             throw new BadRequestAlertException("A new task cannot already have an ID", ENTITY_NAME, "idexists");
         }
         task = taskRepository.save(task);
+        IOAuth2StrategyService service = new GoogleOAuth2Service();
+
         return ResponseEntity.created(new URI("/api/tasks/" + task.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, task.getId().toString()))
             .body(task);
@@ -93,7 +95,7 @@ public class TaskResource {
             .body(task);
     }
 
-    @PostMapping("addToGoogleCalendar/{id}")
+    @PostMapping("/addToGoogleCalendar/{id}")
     public ResponseEntity<Task> addToGoogleCalendar(@PathVariable(value = "id", required = false) final Long id) throws Exception {
         LOG.debug("REST request to update Task : {}", id);
 
@@ -105,7 +107,7 @@ public class TaskResource {
 
         if (task.isPresent()) {
             IOAuth2StrategyService service = new GoogleOAuth2Service();
-            service.addEvent(task.get());
+            service.addEvent(task.orElseThrow());
         }
         return ResponseUtil.wrapOrNotFound(task);
     }
@@ -194,6 +196,12 @@ public class TaskResource {
     public List<Task> getAllTasks() {
         LOG.debug("REST request to get all Tasks");
         return taskRepository.findAll();
+    }
+
+    @GetMapping("/search")
+    public List<Task> searchForTasks(@RequestParam String keyword) {
+        LOG.debug("REST request to search Tasks by name");
+        return taskRepository.findByNameContaining(keyword);
     }
 
     /**

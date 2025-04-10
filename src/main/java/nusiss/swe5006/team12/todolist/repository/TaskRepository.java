@@ -1,5 +1,6 @@
 package nusiss.swe5006.team12.todolist.repository;
 
+import java.util.List;
 import nusiss.swe5006.team12.todolist.domain.Task;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.stereotype.Repository;
@@ -9,4 +10,6 @@ import org.springframework.stereotype.Repository;
  */
 @SuppressWarnings("unused")
 @Repository
-public interface TaskRepository extends JpaRepository<Task, Long> {}
+public interface TaskRepository extends JpaRepository<Task, Long> {
+    List<Task> findByNameContaining(String keyword);
+}
