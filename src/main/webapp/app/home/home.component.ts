@@ -10,7 +10,7 @@ import { Account } from 'app/core/auth/account.model';
 @Component({
   selector: 'jhi-home',
   templateUrl: './home.component.html',
-  styleUrl: './home.component.scss',
+  styleUrls: './home.component.scss',
   imports: [SharedModule, RouterModule],
 })
 export default class HomeComponent implements OnInit, OnDestroy {
@@ -26,6 +26,13 @@ export default class HomeComponent implements OnInit, OnDestroy {
       .getAuthenticationState()
       .pipe(takeUntil(this.destroy$))
       .subscribe(account => this.account.set(account));
+  }
+  goToTaskList(): void {
+    this.router.navigate(['/tasks']);
+  }
+
+  goToAddTask(): void {
+    this.router.navigate(['/tasks/new']);
   }
 
   login(): void {

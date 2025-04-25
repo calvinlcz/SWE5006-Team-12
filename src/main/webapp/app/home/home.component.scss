@@ -9,6 +9,66 @@ Main page styles
   background: url('../../content/images/jhipster_family_member_0.svg') no-repeat center top;
   background-size: contain;
 }
+.landing-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #ECF8F8;
+  text-align: center;
+}
+
+.welcome-message {
+  margin-bottom: 30px;
+}
+
+.welcome-message h1 {
+  font-size: 3rem;
+  color: #793901;
+  font-weight: bold;
+}
+
+
+.welcome-message p {
+  font-size: 1.2rem;
+  color: #793901;
+  max-width: 600px;
+}
+
+.button-container {
+  display: flex;
+  gap: 20px;
+}
+
+button {
+  font-size: 1.1rem;
+  padding: 15px 30px;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+.btn-primary {
+  background-color: #EA8171;
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: #C3331D;
+}
+
+.btn-success {
+  background-color: #5DDE54;
+  color: white;
+}
+
+.btn-success:hover {
+  background-color: #2AAB21;
+}
 
 /* wait autoprefixer update to allow simple generation of high pixel density media query */
 @media only screen and (-webkit-min-device-pixel-ratio: 2),
