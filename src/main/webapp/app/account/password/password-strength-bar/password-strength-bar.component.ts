@@ -3,6 +3,7 @@ import { Component, ElementRef, Renderer2, effect, inject, input } from '@angula
 import SharedModule from 'app/shared/shared.module';
 
 @Component({
+  standalone: true,
   selector: 'jhi-password-strength-bar',
   imports: [SharedModule],
   templateUrl: './password-strength-bar.component.html',

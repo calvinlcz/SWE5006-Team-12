@@ -23,6 +23,13 @@
             "customWebpackConfig": {
               "path": "./webpack/webpack.custom.js"
             },
+            "scripts": [
+              "src/main/webapp/content/js/jquery-3.3.1.min.js",
+              "src/main/webapp/content/js/popper.min.js",
+              "src/main/webapp/content/js/bootstrap.min.js",
+              "src/main/webapp/content/js/owl.carousel.min.js",
+              "src/main/webapp/content/js/main.js"
+            ],
             "outputPath": "target/classes/static/",
             "index": "src/main/webapp/index.html",
             "main": "src/main/webapp/main.ts",
@@ -35,8 +42,13 @@
               "src/main/webapp/manifest.webapp",
               "src/main/webapp/robots.txt"
             ],
-            "styles": ["src/main/webapp/content/scss/vendor.scss", "src/main/webapp/content/scss/global.scss"],
-            "scripts": []
+            "styles": [
+              "src/main/webapp/content/css/bootstrap.min.css",
+              "src/main/webapp/content/css/style.css",
+              "src/main/webapp/content/css/owl.carousel.min.css",
+              "src/main/webapp/content/scss/global.scss",
+              "src/main/webapp/content/scss/vendor.scss"
+            ]
           },
           "configurations": {
             "production": {
