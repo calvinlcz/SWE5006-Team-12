@@ -30,6 +30,7 @@ You will only need to run this command when dependencies change in [package.json
 ```
 ./npmw install
 ```
+for windown run npmw.cmd install on cmd.
 
 We use npm scripts and [Angular CLI][] with [Webpack][] as our build system.
 
@@ -40,6 +41,8 @@ auto-refreshes when files change on your hard drive.
 ./mvnw
 ./npmw start
 ```
+for windown run mvnw.cmd on cmd. 
+run npmw.cmd start on another cmd for traceability.
 
 Npm is also used to manage CSS and JavaScript dependencies used in this application. You can upgrade dependencies by
 specifying a newer version in [package.json](package.json). You can also run `./npmw update` and `./npmw install` to manage dependencies.
